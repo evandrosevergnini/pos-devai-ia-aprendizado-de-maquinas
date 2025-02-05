@@ -12,10 +12,10 @@ Esse notebook ensina como funciona a Regressão Linear, que é uma forma de prev
 ---
 
 ## O que esse projeto faz?**
-✔ **Carrega os dados** de preços de casas em Boston.  
-✔ **Analisa os dados** com estatísticas e gráficos.  
-✔ **Treina um modelo de regressão linear** para prever os preços.  
-✔ **Avalia o modelo usando o Erro Médio Quadrático (MSE).**  
+- **Carrega os dados** de preços de casas em Boston.  
+- **Analisa os dados** com estatísticas e gráficos.  
+- **Treina um modelo de regressão linear** para prever os preços.  
+- **Avalia o modelo usando o Erro Médio Quadrático (MSE).**  
 
 ## **1. Carregando os Dados  (`fetch_openml`)**  
 A primeira coisa que o código faz é **carregar o conjunto de dados Boston Housing**.  
@@ -36,7 +36,7 @@ Para entender os dados, o código cria **gráficos de dispersão** (pontos) que 
 
 Um dos gráficos mais importantes mostra a **relação entre a variável "LSTAT" (percentual de pessoas de baixa renda no bairro) e o preço das casas**. Isso porque bairros com renda menor geralmente têm casas mais baratas.  
 
-📊 **Conclusão:** Os dados sugerem que conforme a variável **LSTAT** aumenta, o preço das casas diminui.  
+**Conclusão:** Os dados sugerem que conforme a variável **LSTAT** aumenta, o preço das casas diminui.  
 
 ---
 
