@@ -7,108 +7,102 @@
 
 # **🏠 Predição de Preço das Casas em Boston**
 
-Este projeto analisa um conjunto de dados sobre casas em Boston e usa **Regressão Linear** para prever seus preços.  
+Esse notebook ensina como funciona a Regressão Linear, que é uma forma de prever valores com base em dados. Para isso, ele usa um conjunto de dados chamado Boston Housing, que contém informações sobre bairros e preços de casas. O objetivo é encontrar uma fórmula matemática que relacione essas informações com o preço das casas.
 
 ---
 
-## **📌 1. O que esse projeto faz?**
+## O que esse projeto faz?**
 ✔ **Carrega os dados** de preços de casas em Boston.  
 ✔ **Analisa os dados** com estatísticas e gráficos.  
 ✔ **Treina um modelo de regressão linear** para prever os preços.  
 ✔ **Avalia o modelo usando o Erro Médio Quadrático (MSE).**  
 
----
+## **🔹 1. Carregando os Dados  (`fetch_openml`)**  
+A primeira coisa que o código faz é **carregar o conjunto de dados Boston Housing**.  
 
-## **📥 2. De onde vêm os dados?**
-Os dados vêm de um arquivo CSV disponível publicamente:  
+- **Os números são guardados em `X`**, que contém informações como:  
+  - Renda média da população no bairro  
+  - Índice de criminalidade  
+  - Número médio de quartos por casa  
+  - Distância até o centro da cidade  
+- **Os preços das casas são armazenados em `y`**, que é o que queremos prever.  
 
-🔗 **[Boston Housing Dataset](https://raw.githubusercontent.com/selva86/datasets/master/BostonHousing.csv)**  
-
-O dataset contém **506 registros** e **14 colunas**, incluindo:  
-- **Características das casas**, como número de quartos e idade.  
-- **Condições do bairro**, como taxa de criminalidade.  
-- **Preço médio das casas (`medv`)**, que queremos prever.  
-
----
-
-## **📊 3. Como analisamos os dados?**
-### 🔹 **3.1 Estatísticas gerais**
-Antes de treinar o modelo, verificamos:  
-✔ Número total de registros e colunas.  
-✔ Valores ausentes (se houver).  
-✔ Estatísticas como média, mediana e desvio padrão.  
-
-### 🔹 **3.2 Histogramas**
-Criamos um **histograma** para visualizar a distribuição dos preços das casas.  
-
-🔽 **Exemplo de gráfico - Histograma do Preço das Casas**  
-
-📌 **O que percebemos?**  
-- A maioria das casas custa **menos de 30 mil dólares**.  
-- Existem **valores extremos**.  
-
-### 🔹 **3.3 Scatter Plots**
-Criamos **gráficos de dispersão** para ver como cada variável influencia o preço das casas.  
-
-🔽 **Exemplo de gráfico - Relação entre Número de Quartos e Preço**  
-
-📌 **O que percebemos?**  
-- Casas com **mais quartos tendem a ser mais caras**.  
-- Bairros com **alta taxa de criminalidade** têm casas mais baratas.  
-
-### 🔹 **3.4 Heatmap de Correlação**
-Criamos um **heatmap** para ver quais variáveis têm mais impacto no preço.  
-
-🔽 **Exemplo de gráfico - Correlação entre Variáveis**  
-
-📌 **O que percebemos?**  
-- **Mais quartos = Preços mais altos**.  
-- **Bairros mais pobres = Preços mais baixos**.  
+👉 **Pergunta:** Será que existe uma relação entre essas informações e o preço das casas?   
 
 ---
 
-## **🏗 4. Como treinamos o modelo?**
-Usamos **Regressão Linear**, um modelo que tenta encontrar padrões entre os preços e as variáveis.  
+## **🔹 2. Explorando os Dados com Gráficos**  
+Para entender os dados, o código cria **gráficos de dispersão** (pontos) que mostram como cada informação se relaciona com o preço das casas.  
 
-### **Passos:**
-1️⃣ **Dividimos os dados** → 80% treino, 20% teste.  
-2️⃣ **Treinamos o modelo** usando os dados de treino.  
-3️⃣ **Fazemos previsões** para os dados de teste.  
-4️⃣ **Medimos o erro médio das previsões (MSE)**.  
+Um dos gráficos mais importantes mostra a **relação entre a variável "LSTAT" (percentual de pessoas de baixa renda no bairro) e o preço das casas**. Isso porque bairros com renda menor geralmente têm casas mais baratas.  
+
+📊 **Conclusão:** Os dados sugerem que conforme a variável **LSTAT** aumenta, o preço das casas diminui.  
 
 ---
 
-## **📈 5. Como avaliamos o modelo?**
-Usamos o **Erro Médio Quadrático (MSE)**, que mede o erro médio das previsões.  
+## **🔹 3. Criando um Modelo Simples de Regressão Linear**  
+Agora, o código cria um modelo matemático que tenta **desenhar uma reta que melhor represente os dados**.  
 
-📌 **Resultado obtido:**  
-**Erro Médio Quadrático (MSE): 21.89**  
+A fórmula desse modelo é:  
 
-📌 **O que isso significa?**  
-- Quanto **menor o MSE**, **melhor** o modelo.  
-- Um erro **de 21.89** indica que as previsões têm **um erro médio razoável**.  
+\[
+\text{preço} = a \times \text{LSTAT} + b
+\]
 
----
+Onde:  
+- **`a`** controla a inclinação da reta  
+- **`b`** indica onde a reta começa no eixo do preço  
 
-## **📉 6. Como visualizamos as previsões?**
-Criamos um gráfico que compara os **valores reais** com as **previsões do modelo**.  
+📌 **Primeiro, o código escolhe valores aleatórios para `a` e `b` e desenha essa reta sobre o gráfico.**  
 
-🔽 **Exemplo de gráfico - Preços Reais vs. Preços Preditos**  
-
-📌 **Como interpretar?**  
-✔ Se os pontos estão **próximos da linha vermelha**, o modelo fez boas previsões.  
-❌ Se os pontos estão **muito espalhados**, o modelo teve dificuldades.  
+Mas esses valores ainda **não são os melhores**! O próximo passo é **encontrar `a` e `b` corretos** para que a reta se aproxime ao máximo dos pontos reais.  
 
 ---
 
-## **✅ 7. Conclusão**
-✔ O modelo conseguiu **fazer previsões razoáveis**, mas pode ser melhorado.  
-✔ Algumas variáveis, como **número de quartos**, têm forte impacto no preço.   
+## **🔹 4. Como Saber se o Modelo Está Bom? (Métricas de Erro)**  
+Para medir se um modelo faz boas previsões, usamos algumas **métricas de erro**, que mostram **o quanto o modelo errou** ao prever o preço das casas.  
+
+O código calcula 3 tipos de erro:  
+
+1. **Erro Médio Absoluto (MAE)** → Mede a diferença média entre os preços reais e os preços previstos.  
+2. **Erro Quadrático Médio (MSE)** → Eleva os erros ao quadrado para evitar números negativos.  
+3. **Raiz do Erro Quadrático Médio (RMSE)** → Faz a raiz quadrada do MSE para que o erro fique na mesma escala dos preços reais.  
+
+📌 **Se o erro for muito grande, significa que nosso modelo precisa ser ajustado!**  
 
 ---
 
-## **📌 O que melhoramos?**
-✅ **Linguagem mais simples e acessível** para qualquer aluno.  
-✅ **Explicação clara** sobre **o que os gráficos e métricas significam**.  
-✅ **Removemos o R²**, como solicitado.  
-✅ **Tudo aparece na tela**, sem caixas de código.  
+## **🔹 5. Melhorando o Modelo com Gradiente Descendente**  
+O código usa um método chamado **Gradiente Descendente** para **ajustar os valores de `a` e `b`** e melhorar as previsões.  
+
+### **Como o Gradiente Descendente funciona?**  
+1️⃣ O modelo **faz previsões** com valores iniciais de `a` e `b`.  
+2️⃣ Calcula **o erro** (diferença entre os valores reais e os previstos).  
+3️⃣ **Ajusta `a` e `b` aos poucos** para diminuir esse erro.  
+4️⃣ **Repete esse processo várias vezes** até encontrar os melhores valores.  
+
+📌 **Isso faz com que a reta se aproxime dos pontos reais do gráfico!**  
+
+O código ainda **desenha um gráfico 3D** que mostra como o erro muda conforme ajustamos `a` e `b`.  
+
+---
+
+## **🔹 6. Comparando com um Modelo Pronto (`sklearn`)**  
+Depois de construir nosso próprio modelo de regressão linear, o código usa a biblioteca **`sklearn`**, que já tem um modelo pronto.  
+
+Esse modelo:  
+- **Aprende os melhores valores de `a` e `b` sozinho**.  
+- **Faz previsões rapidamente**.  
+- **Calcula o erro automaticamente**.  
+
+📌 **O código compara nosso modelo com o do `sklearn` para ver se os resultados são parecidos!**  
+
+---
+
+## **✅ Conclusão**
+- **O notebook mostrou como criar um modelo de regressão linear do zero!**  
+- **Usamos gráficos para entender os dados e prever preços de casas.**  
+- **Aprendemos a medir o erro do modelo e a melhorá-lo com Gradiente Descendente.**  
+- **Por fim, comparamos nossa implementação com um modelo profissional do `sklearn`.**  
+
+Agora **sabemos como prever valores com Regressão Linear!** 
